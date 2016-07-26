@@ -28,6 +28,7 @@
     self.collectionView.collectionViewLayout = self.layout;
     self.collectionView.pagingEnabled = NO;
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+    self.index = 2;
     self.collectionView.contentOffset = CGPointMake(self.layout.itemSize.width * 2, 0);
     self.items = @[@4, @5, @1, @2, @3, @4, @5, @1, @2];
 }
@@ -100,6 +101,16 @@
     } else if (scrollView.contentOffset.x >= cellWidth * (total - 2)) {
         scrollView.contentOffset = CGPointMake(cellWidth * 2, scrollView.contentOffset.y);
     }
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        self.collectionView.contentOffset = CGPointMake(self.index * self.layout.itemSize.width, self.collectionView.contentOffset.y);
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+    }];
 }
 
 @end

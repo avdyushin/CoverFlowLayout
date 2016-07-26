@@ -60,13 +60,6 @@
     
     [self.layoutAttributes enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *stop) {
         if (CGRectIntersectsRect(rect, visibleRect)) {
-            const CGFloat d = CGRectGetMidX(visibleRect) - attributes.center.x;
-            const CGFloat n = d / 100.0;
-            const CGFloat s = 0.98 + 0.02*(1 - ABS(n));
-            
-            CGAffineTransform scale = CGAffineTransformMakeScale(s, s);
-            attributes.transform = scale;
-            
             [layoutAttributes addObject:attributes];
         }
     }];
